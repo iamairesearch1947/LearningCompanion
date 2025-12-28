@@ -11,6 +11,9 @@ interface LibraryProps {
 
 export default function Library({ books, onSelectBook }: LibraryProps) {
   const getReadingProgress = (bookId: string) => {
+    // Check if we're in the browser before accessing localStorage
+    if (typeof window === 'undefined') return 0;
+
     const saved = localStorage.getItem(`progress-${bookId}`);
     if (!saved) return 0;
 
